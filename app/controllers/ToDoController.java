@@ -1,12 +1,11 @@
 package controllers;
 
 import play.mvc.*;
-
-import views.html.*;
-
 import models.Todo;
-
 import play.Logger;
+import java.util.*;
+import play.libs.*;
+import com.fasterxml.jackson.databind.JsonNode;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -21,7 +20,10 @@ public class ToDoController extends Controller {
      * <code>GET</code> request with a path of <code>/</code>.
      */
     public Result getTodos() {
-        return ok("List of ToDos.");
+        List<Todo> todos = Todo.find.all();
+
+        JsonNode json = Json.toJson(todos);
+        return ok(json);
     }
 
     public Result addTodo(Todo newTodo) {

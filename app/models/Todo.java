@@ -14,13 +14,15 @@ public class Todo extends Model implements QueryStringBindable<Todo> {
     public Boolean done;
     public String text;
 
+    public static Finder<Long, Todo> find = new Finder<Long, Todo>(Todo.class);
+
     @Override
     public Optional<Todo> bind(String key, Map<String, String[]> data) {
         try{
             done = new Boolean(data.get("done")[0]);
             text = new String(data.get("text")[0]);
             return Optional.of(this);
-        } catch (Exception e){ // no parameter match return None
+        } catch (Exception e) { // no parameter match return None
             return Optional.of(null);
         }
     }

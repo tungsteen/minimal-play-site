@@ -1,8 +1,11 @@
-requirejs.config();
+require.config();
 
 
-requirejs(['jquery'], function($) {
+require(["todolist", "jquery"], function(tdl, $) {
     $(document).ready(function() {
+
+        //tdl.updateToDoList();
+
         $("#addToDoEntryForm").submit( function( event ) {
             event.preventDefault();
 
@@ -20,6 +23,8 @@ requirejs(['jquery'], function($) {
               // var content = $( data ).find( "#content" );
               // $( "#result" ).empty().append( content );
           });
+
         });
     });
+
 });
