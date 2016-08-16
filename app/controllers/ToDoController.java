@@ -6,6 +6,8 @@ import views.html.*;
 
 import models.Todo;
 
+import play.Logger;
+
 /**
  * This controller contains an action to handle HTTP requests
  * to the application's home page.
@@ -19,12 +21,13 @@ public class ToDoController extends Controller {
      * <code>GET</code> request with a path of <code>/</code>.
      */
     public Result getTodos() {
-        return ok(index.render("List of ToDos."));
+        return ok("List of ToDos.");
     }
 
     public Result addTodo(Todo newTodo) {
+        Logger.debug("addTodo: Get new todo!");
         newTodo.save();
-        return ok(index.render("ToDo added."));
+        return ok("ToDo added.");
     }
 
 }

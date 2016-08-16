@@ -15,9 +15,13 @@
         <script data-main="@routes.Assets.versioned("javascripts/main.js")" 
                 type="text/javascript" 
                 src="@routes.Assets.versioned("lib/requirejs/require.js")"></script>
+            @helper.javascriptRouter("jsRoutes")(
+                routes.javascript.ToDoController.getTodos,
+                routes.javascript.ToDoController.addTodo
+            )
     </head>
     <body>
-        <section class="content">@content</section>
+        @content
         <script type="text/javascript" src="@routes.Assets.versioned("lib/jquery/jquery.js")"></script>
         <script type="text/javascript" src="@routes.Assets.versioned("lib/bootstrap/js/bootstrap.min.js")"></script>
     </body>

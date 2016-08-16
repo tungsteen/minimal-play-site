@@ -37,7 +37,7 @@ public class Todo extends Model implements QueryStringBindable<Todo> {
 
     @Override
     public String javascriptUnbind() {
-        return "function(k,v) {\n" +
+        return "function(k, v) {\n" +
           "    return encodeURIComponent('done')+'='+v.done+'&'+encodeURIComponent('text')+'='+v.text;\n" +
                                                     "}";
     }
