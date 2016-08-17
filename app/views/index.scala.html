@@ -39,22 +39,20 @@
                 </thead>
                 <tbody id="insert-here">
                     @for(todo <- todoList) { 
-                        <tr><td>@todo.id</td><td><input type="checkbox" @if(todo.done) {checked="checked"}></td><td>@todo.text</td></tr>
+                        <tr>
+                            <td>@todo.id</td>
+                            <td><input type="checkbox" @if(todo.done) {checked="checked"}></td>
+                            <td>@todo.text</td>
+                        </tr>
                     }
-                <tr>
-                    <td>-</td>
-                    <td><input type="checkbox"></td>
-                    <td>
-                        <form action="/todos" id="addToDoEntryForm" class="input-group">
-                            <input type="text" class="form-control" id="textToSubmit" placeholder="Type action here...">
-                              <span class="input-group-btn">
-                                <input class="btn btn-default" type="submit" id="addButton" value="Add">
-                              </span>
-                        </form>
-                    </td>
-                </tr>
             </tbody>
             </table>
+            <form action="/todos" id="addToDoEntryForm" class="input-group">
+                <input type="text" class="form-control" id="textToSubmit" placeholder="Type action here...">
+                  <span class="input-group-btn">
+                    <input class="btn btn-default" type="submit" id="addButton" value="Add">
+                  </span>
+            </form>
         </div>
     </div>
 }

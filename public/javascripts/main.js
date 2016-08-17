@@ -16,6 +16,8 @@ require(["todolist", "jquery"], function(tdl, $) {
             event.preventDefault();
             tdl.addTodoEntry($(this));
         });
-    });
 
+        $("td").hover(function() { $(this).css("background-color", "red"); }, 
+                      function() { $(this).css("background-color", "white"); });
+    });
 });
