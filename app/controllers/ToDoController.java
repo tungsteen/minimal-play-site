@@ -29,7 +29,8 @@ public class ToDoController extends Controller {
     public Result addTodo(Todo newTodo) {
         Logger.debug("addTodo: Get new todo!");
         newTodo.save();
-        return ok("ToDo added.");
+        JsonNode jsonTodo = Json.toJson(newTodo);
+        return ok(jsonTodo);
     }
 
 }

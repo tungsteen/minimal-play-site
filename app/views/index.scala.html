@@ -1,15 +1,11 @@
-@*
- * This template takes a single argument, a String containing a
- * message to display.
- *@
-@(message: String)
+@(todoList: List[Todo])
 
 @*
  * Call the `main` template with two arguments. The first
  * argument is a `String` with the title of the page, the second
  * argument is an `Html` object containing the body of the page.
  *@
-@main(title = "Home") {
+@main(title = "ToDo List") {
     <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -41,7 +37,10 @@
                         <th class="text-center">Action</th> 
                     </tr> 
                 </thead>
-                <tbody>
+                <tbody id="insert-here">
+                    @for(todo <- todoList) { 
+                        <tr><td>@todo.id</td><td><input type="checkbox" @if(todo.done) {checked="checked"}></td><td>@todo.text</td></tr>
+                    }
                 <tr>
                     <td>-</td>
                     <td><input type="checkbox"></td>
@@ -49,13 +48,13 @@
                         <form action="/todos" id="addToDoEntryForm" class="input-group">
                             <input type="text" class="form-control" id="textToSubmit" placeholder="Type action here...">
                               <span class="input-group-btn">
-                                <input class="btn btn-default" type="submit" id="addButton" value="Add"></input>
+                                <input class="btn btn-default" type="submit" id="addButton" value="Add">
                               </span>
                         </form>
                     </td>
                 </tr>
             </tbody>
             </table>
-          
+        </div>
     </div>
 }
