@@ -33,4 +33,21 @@ public class ToDoController extends Controller {
         return ok(jsonTodo);
     }
 
+    public Result doneTodo(Long id)
+    {
+        Logger.debug("doneTodo: Change done of entry: " + id);
+        Todo todo = Todo.find.byId(id);
+        todo.done = !todo.done;
+        todo.update();
+        JsonNode jsonDone = Json.toJson(todo.done);
+        return ok(jsonDone);
+    }
+
+    public Result deleteTodo(Long id)
+    {
+        Todo todo = Todo.find.byId(id);
+        todo.delete();
+        return ok();
+    }
+
 }

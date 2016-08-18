@@ -15,39 +15,35 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Project name</a>
+            <a class="navbar-brand" href="#">ToDo List</a>
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div><!--/.nav-collapse -->
     </div>
     </nav>
     <div class="container">
         <div class="starter-template"> 
             <h1>ToDo List:</h1> 
-            <table class="table">
+            <table class="table table-hover todo-table">
                 <thead> 
                     <tr> 
                         <th class="text-center">#</th> 
                         <th class="text-center">Done</th> 
                         <th class="text-center">Action</th> 
+                        <th></th> 
                     </tr> 
                 </thead>
                 <tbody id="insert-here">
-                    @for(todo <- todoList) { 
-                        <tr>
-                            <td>@todo.id</td>
-                            <td><input type="checkbox" @if(todo.done) {checked="checked"}></td>
-                            <td>@todo.text</td>
+                    @for((todo, index) <- todoList.zipWithIndex) { 
+                        <tr class="todo-row" entryId="@todo.id">
+                            <td class="col-md-1">@index</td>
+                            <!-- autocomplete=off turns off cache of checkbox state -->
+                            <td class="col-md-1"><input autocomplete="off" type="checkbox" @if(todo.done) {checked}></td>
+                            <td class="todo-text" @if(todo.done) {style="text-decoration:line-through;"}> @todo.text </td>
+                            <td class="col-md-1"><span class="glyphicon glyphicon-remove delete-button"></span></td>
                         </tr>
                     }
             </tbody>
             </table>
-            <form action="/todos" id="addToDoEntryForm" class="input-group">
+            <form action="/" id="add-form" class="input-group">
                 <input type="text" class="form-control" id="textToSubmit" placeholder="Type action here...">
                   <span class="input-group-btn">
                     <input class="btn btn-default" type="submit" id="addButton" value="Add">

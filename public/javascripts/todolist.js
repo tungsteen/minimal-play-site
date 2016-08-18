@@ -2,18 +2,6 @@
 
 define(['jquery'], function($) {
 
-    function updateToDoList() {
-        console.log("ToDo List: Update!");
-        var getTodosUrl = jsRoutes.controllers.ToDoController.getTodos();
-        var getContent = $.get( getTodosUrl.url );
-
-        getContent.done(function( data ) {
-            data.forEach(function(val) {
-                console.log(val);
-            });
-        });
-    }
-
     function addTodoEntry( submitForm ) {
         var textForm = submitForm.find("#textToSubmit").val(); 
 
@@ -24,14 +12,45 @@ define(['jquery'], function($) {
         // Put the results in a div
         posting.done(function( data ) {
             console.log("Receive on done: " + data);
-            $('#insert-here').append("<tr><td>" + data.id + "</td><td><input type='checkbox'></td><td>" + data.text + "</td></tr>");
-            // var content = $( data ).find( "#content" );
-            // $( "#result" ).empty().append( content );
+            $('#insert-here').append("<tr class='todo-row' entryId='" + data.id +"'>" + 
+                "<td class='col-md-1'> - </td>" + 
+                "<td class='col-md-1'><input autocomplete='off' type='checkbox'></td>" + 
+                "<td class='todo-text'>" + data.text + "</td>" + 
+                "<td class='col-md-1'><span class='glyphicon glyphicon-remove delete-button'></span></td>" + 
+                "</tr>");
+        });
+    }
+
+    function doneTodoEntry(todoRow)
+    {
+        var entryId = todoRow.attr("entryId");
+        console.log("Will set id: " + entryId + " to done");
+        var doneTodoUrl = jsRoutes.controllers.ToDoController.doneTodo(entryId);
+        var donePosting = $.post( doneTodoUrl.url );
+
+        donePosting.done(function(isDone) {
+            todoRow.find("input[type='checkbox']").prop("checked", isDone);
+            todoRow.find("td.todo-text").css("text-decoration", isDone ? "line-through" : "none");
+            todoRow.find("span.delete-button").css("visibility", isDone ? "visible" : "hidden");
+        });
+    }
+
+    function deleteTodoEntry(clickedSpan)
+    {
+        var entryId = clickedSpan.closest("tr").attr("entryId");
+        console.log("Will delete entry: " + entryId);
+
+        var deleteUrl = jsRoutes.controllers.ToDoController.deleteTodo(entryId);
+        $.ajax({ 
+            url: deleteUrl.url,
+            type: 'DELETE',
+            success: function() { clickedSpan.closest("tr").remove(); }
         });
     }
 
     return {
-        updateToDoList: updateToDoList,
-        addTodoEntry: addTodoEntry    
+        addTodoEntry: addTodoEntry,
+        doneTodoEntry: doneTodoEntry,
+        deleteTodoEntry: deleteTodoEntry
     }
 });

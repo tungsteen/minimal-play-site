@@ -13,3 +13,9 @@ body {
 .background-red {
     background-color: white;
 }
+
+.delete-button {
+    visibility: hidden; 
+    color: gray;
+    cursor: default;
+}

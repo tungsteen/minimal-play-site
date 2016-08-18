@@ -5,8 +5,10 @@
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
 
-GET     /todos                      controllers.ToDoController.getTodos
+GET     /todos/all                  controllers.ToDoController.getTodos
 POST    /todos                      controllers.ToDoController.addTodo(newTodo: models.Todo)
+POST    /todos/done/:id             controllers.ToDoController.doneTodo(id: Long)
+DELETE  /todos/:id                  controllers.ToDoController.deleteTodo(id: Long)
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code

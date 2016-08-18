@@ -17,7 +17,9 @@
                 src="@routes.Assets.versioned("lib/requirejs/require.js")"></script>
         @helper.javascriptRouter("jsRoutes")(
             routes.javascript.ToDoController.getTodos,
-            routes.javascript.ToDoController.addTodo
+            routes.javascript.ToDoController.addTodo,
+            routes.javascript.ToDoController.doneTodo,
+            routes.javascript.ToDoController.deleteTodo
         )
     </head>
     <body>
