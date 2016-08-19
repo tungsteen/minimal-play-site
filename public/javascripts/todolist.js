@@ -13,7 +13,6 @@ define(['jquery'], function($) {
         posting.done(function( data ) {
             console.log("Receive on done: " + data);
             $('#insert-here').append("<tr class='todo-row' entryId='" + data.id +"'>" + 
-                "<td class='col-md-1'> - </td>" + 
                 "<td class='col-md-1'><input autocomplete='off' type='checkbox'></td>" + 
                 "<td class='todo-text'>" + data.text + "</td>" + 
                 "<td class='col-md-1'><span class='glyphicon glyphicon-remove delete-button'></span></td>" + 

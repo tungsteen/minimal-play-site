@@ -6,6 +6,7 @@ import play.Logger;
 import java.util.*;
 import play.libs.*;
 import com.fasterxml.jackson.databind.JsonNode;
+import play.db.ebean.Transactional;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -21,7 +22,6 @@ public class ToDoController extends Controller {
      */
     public Result getTodos() {
         List<Todo> todos = Todo.find.all();
-
         JsonNode json = Json.toJson(todos);
         return ok(json);
     }
@@ -33,12 +33,15 @@ public class ToDoController extends Controller {
         return ok(jsonTodo);
     }
 
+    @Transactional
     public Result doneTodo(Long id)
     {
         Todo todo = Todo.find.byId(id);
-        todo.done = !todo.done;
+        // use setDone instead of direct field access, because on linux dfa does not work 
+        todo.setDone(!todo.done);
+        // todo.done = !todo.done;
+        todo.save();
         Logger.debug("doneTodo: Change done flag of entry: " + id + " to " + todo.done);
-        todo.update();
         JsonNode jsonDone = Json.toJson(todo.done);
         return ok(jsonDone);
     }

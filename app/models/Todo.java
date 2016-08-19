@@ -11,7 +11,7 @@ public class Todo extends Model implements QueryStringBindable<Todo> {
     @Id
     public Long id;
 
-    public Boolean done;
+    public boolean done;
     public String text;
 
     public Todo(Boolean isDone, String msg) {

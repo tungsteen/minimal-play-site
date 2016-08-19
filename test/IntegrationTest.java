@@ -20,6 +20,7 @@ public class IntegrationTest {
             Todo t = new Todo(false, "Eat Snacks");
             t.save();
             browser.goTo("http://localhost:3333");
+            browser.await().atMost(5, TimeUnit.SECONDS).until("#textToSubmit").isPresent();
             assertEquals("Eat Snacks", browser.$(".todo-text").getText());
             assertTrue(browser.title().contains("ToDo List"));
         });
@@ -29,6 +30,7 @@ public class IntegrationTest {
     public void addNewTodo() {
         running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, browser -> {
             browser.goTo("http://localhost:3333");
+            browser.await().atMost(5, TimeUnit.SECONDS).until("#textToSubmit").isPresent();
             browser.fill("#textToSubmit").with("Buy Milk");
             browser.$("#add-form").submit();
             browser.await().atMost(5, TimeUnit.SECONDS).until(".todo-text").hasSize(1);
@@ -42,7 +44,8 @@ public class IntegrationTest {
             Todo t = new Todo(false, "Eat Snacks");
             t.save();
             browser.goTo("http://localhost:3333");
-            assertEquals("text-decoration:none;", browser.$(".todo-text").getAttribute("style"));
+            browser.await().atMost(5, TimeUnit.SECONDS).until("#textToSubmit").isPresent();
+            //browser.await().atMost(5, TimeUnit.SECONDS).until(".todo-text").with("style").contains("none").isPresent();
             browser.$(".done-checkbox").click();
             browser.await().atMost(5, TimeUnit.SECONDS).until(".todo-text").with("style").contains("line-through").isPresent();
             browser.$(".done-checkbox").click();
