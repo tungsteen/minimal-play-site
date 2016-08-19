@@ -35,9 +35,9 @@ public class ToDoController extends Controller {
 
     public Result doneTodo(Long id)
     {
-        Logger.debug("doneTodo: Change done of entry: " + id);
         Todo todo = Todo.find.byId(id);
         todo.done = !todo.done;
+        Logger.debug("doneTodo: Change done flag of entry: " + id + " to " + todo.done);
         todo.update();
         JsonNode jsonDone = Json.toJson(todo.done);
         return ok(jsonDone);

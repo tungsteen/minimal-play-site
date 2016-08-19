@@ -32,12 +32,12 @@
                     </tr> 
                 </thead>
                 <tbody id="insert-here">
-                    @for((todo, index) <- todoList.zipWithIndex) { 
+                    @for((todo, index) <- todoList.zipWithIndex) {
                         <tr class="todo-row" entryId="@todo.id">
                             <td class="col-md-1">@index</td>
                             <!-- autocomplete=off turns off cache of checkbox state -->
-                            <td class="col-md-1"><input autocomplete="off" type="checkbox" @if(todo.done) {checked}></td>
-                            <td class="todo-text" @if(todo.done) {style="text-decoration:line-through;"}> @todo.text </td>
+                            <td class="col-md-1"><input autocomplete="off" class="done-checkbox" type="checkbox" @if(todo.done) {checked}></td>
+                            <td class="todo-text" style="text-decoration:@if(todo.done){line-through} else {none};"> @todo.text </td>
                             <td class="col-md-1"><span class="glyphicon glyphicon-remove delete-button"></span></td>
                         </tr>
                     }

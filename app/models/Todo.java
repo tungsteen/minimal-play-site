@@ -14,6 +14,11 @@ public class Todo extends Model implements QueryStringBindable<Todo> {
     public Boolean done;
     public String text;
 
+    public Todo(Boolean isDone, String msg) {
+        this.done = isDone;
+        this.text = msg;
+    }
+
     public static Finder<Long, Todo> find = new Finder<Long, Todo>(Todo.class);
 
     @Override

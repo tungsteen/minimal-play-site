@@ -9,10 +9,6 @@ GET     /todos/all                  controllers.ToDoController.getTodos
 POST    /todos                      controllers.ToDoController.addTodo(newTodo: models.Todo)
 POST    /todos/done/:id             controllers.ToDoController.doneTodo(id: Long)
 DELETE  /todos/:id                  controllers.ToDoController.deleteTodo(id: Long)
-# An example controller showing how to use dependency injection
-GET     /count                      controllers.CountController.count
-# An example controller showing how to write asynchronous code
-GET     /message                    controllers.AsyncController.message
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
