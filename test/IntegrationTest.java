@@ -33,7 +33,7 @@ public class IntegrationTest {
             browser.await().atMost(5, TimeUnit.SECONDS).until("#textToSubmit").isPresent();
             browser.fill("#textToSubmit").with("Buy Milk");
             browser.$("#add-form").submit();
-            browser.await().atMost(5, TimeUnit.SECONDS).until(".todo-text").hasSize(1);
+            browser.await().atMost(5, TimeUnit.SECONDS).until(".todo-text").hasText("Buy Milk");
             assertEquals("Buy Milk", browser.$(".todo-text").getText());
         });
     }
@@ -53,5 +53,18 @@ public class IntegrationTest {
         });
     }
 
+    @Test
+    public void deleteTodoEntry() {
+        running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, browser -> {
+            Todo t = new Todo(false, "Eat Snacks");
+            t.save();
+            browser.goTo("http://localhost:3333");
+            browser.await().atMost(5, TimeUnit.SECONDS).until("#textToSubmit").isPresent();
+            browser.$(".done-checkbox").click();
+            browser.await().atMost(5, TimeUnit.SECONDS).until(".delete-button").areDisplayed();
+            browser.$(".delete-button").click();
+            browser.await().atMost(5, TimeUnit.SECONDS).until(".todo-text").with("style").contains("line-through").isNotPresent();
+        });
+    }
 
 }

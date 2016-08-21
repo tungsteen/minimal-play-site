@@ -39,7 +39,7 @@ public class ToDoController extends Controller {
         Todo todo = Todo.find.byId(id);
         // use setDone instead of direct field access, because on linux dfa does not work 
         todo.setDone(!todo.done);
-        // todo.done = !todo.done;
+        //todo.done = !todo.done;
         todo.save();
         Logger.debug("doneTodo: Change done flag of entry: " + id + " to " + todo.done);
         JsonNode jsonDone = Json.toJson(todo.done);
