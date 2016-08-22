@@ -15,4 +15,6 @@ libraryDependencies ++= Seq(
 libraryDependencies += "org.webjars" % "bootstrap" % "3.3.7"
 libraryDependencies += "org.webjars" % "requirejs" % "2.2.0" 
 libraryDependencies += "org.webjars" % "jquery" % "3.1.0" 
+libraryDependencies += "org.webjars" % "jquery" % "3.1.0"
+libraryDependencies += "com.jayway.restassured" % "rest-assured" % "2.9.0"
 

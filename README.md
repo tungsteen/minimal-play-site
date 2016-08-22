@@ -8,7 +8,9 @@ Proof of concept for ToDo Web Site with RESTful interface.
 - jQuery 3.1.0
 
 ## Autotests
-- JUnit and FluentLenium
+- JUnit
+- FluentLenium
+- Rest-assured
 
 ## License
 This software is licensed under the Apache 2 license, quoted below.
