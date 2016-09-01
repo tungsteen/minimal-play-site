@@ -5,9 +5,16 @@
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
 
+# to retrive resource, use GET
 GET     /todos/all                  controllers.ToDoController.getTodos
+
+# to create resouce, use POST
 POST    /todos                      controllers.ToDoController.addTodo(newTodo: models.Todo)
-POST    /todos/done/:id             controllers.ToDoController.doneTodo(id: Long)
+
+# to change the state, use PUT
+PUT     /todos/done/:id             controllers.ToDoController.doneTodo(id: Long)
+
+# to remove resource, use DELETE
 DELETE  /todos/:id                  controllers.ToDoController.deleteTodo(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path

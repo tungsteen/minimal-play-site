@@ -68,7 +68,7 @@ public class RestTest
 
             Logger.debug(node.toString());
 
-            RestAssured.expect().statusCode(200).when().post("/todos/done/" + id1);
+            RestAssured.expect().statusCode(200).when().put("/todos/done/" + id1);
             body = RestAssured.expect().statusCode(200)
                             .when().get("/todos/all").andReturn().body().asString();
 

@@ -11,7 +11,6 @@ define(['jquery'], function($) {
  
         // Put the results in a div
         posting.done(function( data ) {
-            console.log("Receive on done: " + data);
             $('#insert-here').append("<tr class='todo-row' entryId='" + data.id +"'>" + 
                 "<td class='col-md-1'><input autocomplete='off' type='checkbox'></td>" + 
                 "<td class='todo-text'>" + data.text + "</td>" + 
@@ -23,11 +22,11 @@ define(['jquery'], function($) {
     function doneTodoEntry(todoRow)
     {
         var entryId = todoRow.attr("entryId");
-        console.log("Will set id: " + entryId + " to done");
         var doneTodoUrl = jsRoutes.controllers.ToDoController.doneTodo(entryId);
-        var donePosting = $.post( doneTodoUrl.url );
-
-        donePosting.done(function(isDone) {
+        $.ajax({ 
+            url: doneTodoUrl.url,
+            type: 'PUT'
+        }).done(function(isDone) {
             todoRow.find("input[type='checkbox']").prop("checked", isDone);
             todoRow.find("td.todo-text").css("text-decoration", isDone ? "line-through" : "none");
             todoRow.find("span.delete-button").css("visibility", isDone ? "visible" : "hidden");
@@ -37,7 +36,6 @@ define(['jquery'], function($) {
     function deleteTodoEntry(clickedSpan)
     {
         var entryId = clickedSpan.closest("tr").attr("entryId");
-        console.log("Will delete entry: " + entryId);
 
         var deleteUrl = jsRoutes.controllers.ToDoController.deleteTodo(entryId);
         $.ajax({ 
